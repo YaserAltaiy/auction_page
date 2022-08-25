@@ -1,0 +1,38 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+Categories
+{% endblock %}
+
+{% block body %}
+<div>
+    {% for x in categories %}
+
+    <div style="width:200px;display:inline-block;margin:10px 20px 10px 20px;">
+        <form action="{% url 'category' %}" method="POST">{% csrf_token %}
+            <input type="submit" name="option" value="{{ x }}" style="display:inline;text-align: center;width: 200px;">
+        </form>
+    </div>
+
+    {% endfor %}
+</div>
+<div>
+    {% for list in auctions %}
+    <a href="{% url 'listing' list.id %}">
+        <div style="border:1px black solid ; display:block;border-radius: 10px;border: 3px solid gray;padding: 10px;">
+            <div style="display: inline-block;width: 40%;"><img src="{{ list.image }}" style="height:200px;"></div>
+            <div style="display: inline-block;color:black;font-size: larger;width:29%;">
+                <p style="font-weight: bold;display:inline">Title : </p>{{ list.title }}<br><br>
+                <p style="font-weight: bold;display:inline">Price : </p>${{ list.start_bid }}<br>
+                <i>{{ list.time_create }}</i>
+            </div>
+            <div style="display: inline-block;color:black;font-size: larger;width:29%;">
+                <p style="font-weight: bold;display:inline">Descriptions : </p><br>
+                {{ list.description }}
+            </div>
+        </div>
+    </a>
+    <br>
+    {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends "auctions/layout.html" %}
+
+{% block title %}
+Creating new list
+{% endblock %}
+
+{% block body %}
+<form action="{% url 'saving' %}" method="post">{% csrf_token %}
+    <div class="form-group">
+        <input class="form-control" autofocus type="text" name="Ltitle" placeholder="Title" required>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" name="Ldesc" placeholder="Descriptions" required>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="number" name="Lstartingbid" placeholder="Starting Bid $" required>
+    </div>
+    <div class="form-group">
+        <input class="form-control" type="text" name="Limageurl" placeholder="Image URL" required>
+    </div>
+    <h5>Select Category : </h5>
+    <div style="width: 400px;">
+        {% for x in categories %}
+        <div style="width:100px;display:inline-block">
+            <input type="radio" name="option" value="{{ x }}" style="display:inline" required>
+            <label for="">{{ x }}</label>
+        </div>
+        {% endfor %}
+    </div>
+    
+
+    <br>
+    <input class="btn btn-primary" type="submit" value="Create">
+</form>
+{% endblock %}
