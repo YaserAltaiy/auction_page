@@ -25,7 +25,7 @@ def index(request):
     lists = []
     for i in reversed(auctions):
         lists.append(i)
-    return render(request, "auctions/layoutt.html",{
+    return render(request, "auctions/index.html",{
         "lists" : lists,
     })
 
@@ -41,7 +41,7 @@ def login_view(request):
         # Check if authentication successful
         if user is not None:
             login(request, user)
-            return HttpResponseRedirect(reverse("layoutt"))
+            return HttpResponseRedirect(reverse("index"))
         else:
             return render(request, "auctions/login.html", {
                 "message": "Invalid username and/or password."
@@ -52,7 +52,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return HttpResponseRedirect(reverse("layoutt"))
+    return HttpResponseRedirect(reverse("index"))
 
 
 def register(request):
@@ -77,7 +77,7 @@ def register(request):
                 "message": "Username already taken."
             })
         login(request, user)
-        return HttpResponseRedirect(reverse("layoutt"))
+        return HttpResponseRedirect(reverse("index"))
     else:
         return render(request, "auctions/register.html")
 
